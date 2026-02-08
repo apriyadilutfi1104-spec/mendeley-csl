@@ -3,7 +3,7 @@
        version="1.0"
        class="author-date"
        default-locale="en-US">
-       
+
   <info>
     <title>Custom Jurnal Buku Lutfi</title>
     <id>http://www.zotero.org/styles/custom-jurnal-buku-lutfi</id>
@@ -11,14 +11,14 @@
       <name>Lutfi</name>
     </author>
     <category citation-format="author-date"/>
-    <summary>Style jurnal dan buku custom tanpa ibid.</summary>
     <updated>2026-02-08</updated>
+    <summary>Format jurnal dan buku custom (tanpa ibid)</summary>
   </info>
 
   <!-- AUTHOR -->
   <macro name="author">
     <names variable="author">
-      <name form="long" name-as-sort-order="first" sort-separator=", "/>
+      <name name-as-sort-order="first" sort-separator=", "/>
     </names>
   </macro>
 
@@ -29,36 +29,27 @@
     </date>
   </macro>
 
-  <!-- TITLE -->
-  <macro name="title">
-    <text variable="title"/>
-  </macro>
-
-  <!-- JOURNAL -->
+  <!-- JOURNAL DETAILS -->
   <macro name="journal">
-    <group>
-      <text variable="container-title" font-style="italic"/>
-      <group prefix=". ">
-        <text variable="volume"/>
-        <group prefix="(" suffix=")">
-          <text variable="issue"/>
-        </group>
-        <text variable="page" prefix=": "/>
+    <text variable="container-title" font-style="italic"/>
+    <group prefix=". ">
+      <text variable="volume"/>
+      <group prefix="(" suffix=")">
+        <text variable="issue"/>
       </group>
+      <text variable="page" prefix=": "/>
     </group>
   </macro>
 
-  <!-- BOOK -->
+  <!-- BOOK DETAILS -->
   <macro name="book">
-    <group>
-      <text variable="publisher"/>
-      <text variable="publisher-place" prefix=". "/>
-    </group>
+    <text variable="publisher"/>
+    <text variable="publisher-place" prefix=". "/>
   </macro>
 
-  <!-- CITATION (IN-TEXT) -->
+  <!-- IN-TEXT CITATION -->
   <citation>
-    <layout>
+    <layout delimiter="; ">
       <text macro="author"/>
       <text macro="year" prefix=", "/>
     </layout>
@@ -67,13 +58,14 @@
   <!-- BIBLIOGRAPHY -->
   <bibliography hanging-indent="true">
     <layout suffix=".">
-      
-      <!-- JOURNAL ARTICLE -->
+
       <choose>
+
+        <!-- JOURNAL -->
         <if type="article-journal">
           <text macro="author"/>
           <text macro="year" prefix=". "/>
-          <text macro="title" prefix=". "/>
+          <text variable="title" prefix=". "/>
           <text macro="journal" prefix=". "/>
           <text variable="URL" prefix=". "/>
         </if>
@@ -82,9 +74,17 @@
         <else-if type="book">
           <text macro="author"/>
           <text macro="year" prefix=". "/>
-          <text macro="title" prefix=". " font-style="italic"/>
+          <text variable="title" font-style="italic" prefix=". "/>
           <text macro="book" prefix=". "/>
         </else-if>
+
+        <!-- FALLBACK -->
+        <else>
+          <text macro="author"/>
+          <text macro="year" prefix=". "/>
+          <text variable="title" prefix=". "/>
+        </else>
+
       </choose>
 
     </layout>
