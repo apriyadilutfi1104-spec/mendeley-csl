@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl"
-       version="1.0"
-       class="author-date"
-       default-locale="en-US">
+  version="1.0"
+  class="author-date"
+  default-locale="en-US">
 
   <info>
     <title>Custom Jurnal Buku Lutfi</title>
@@ -12,7 +12,6 @@
     </author>
     <category citation-format="author-date"/>
     <updated>2026-02-08</updated>
-    <summary>Format jurnal dan buku custom (tanpa ibid)</summary>
   </info>
 
   <!-- AUTHOR -->
@@ -29,7 +28,7 @@
     </date>
   </macro>
 
-  <!-- JOURNAL DETAILS -->
+  <!-- JOURNAL -->
   <macro name="journal">
     <text variable="container-title" font-style="italic"/>
     <group prefix=". ">
@@ -41,13 +40,13 @@
     </group>
   </macro>
 
-  <!-- BOOK DETAILS -->
+  <!-- BOOK -->
   <macro name="book">
     <text variable="publisher"/>
     <text variable="publisher-place" prefix=". "/>
   </macro>
 
-  <!-- IN-TEXT CITATION -->
+  <!-- IN-TEXT -->
   <citation>
     <layout delimiter="; ">
       <text macro="author"/>
@@ -58,10 +57,8 @@
   <!-- BIBLIOGRAPHY -->
   <bibliography hanging-indent="true">
     <layout suffix=".">
-
       <choose>
 
-        <!-- JOURNAL -->
         <if type="article-journal">
           <text macro="author"/>
           <text macro="year" prefix=". "/>
@@ -70,7 +67,6 @@
           <text variable="URL" prefix=". "/>
         </if>
 
-        <!-- BOOK -->
         <else-if type="book">
           <text macro="author"/>
           <text macro="year" prefix=". "/>
@@ -78,7 +74,6 @@
           <text macro="book" prefix=". "/>
         </else-if>
 
-        <!-- FALLBACK -->
         <else>
           <text macro="author"/>
           <text macro="year" prefix=". "/>
@@ -86,7 +81,6 @@
         </else>
 
       </choose>
-
     </layout>
   </bibliography>
 
