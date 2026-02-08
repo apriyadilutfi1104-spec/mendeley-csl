@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl"
+       version="1.0"
+       class="author-date"
+       default-locale="en-US">
+       
+  <info>
+    <title>Custom Jurnal Buku Lutfi</title>
+    <id>http://www.zotero.org/styles/custom-jurnal-buku-lutfi</id>
+    <author>
+      <name>Lutfi</name>
+    </author>
+    <category citation-format="author-date"/>
+    <summary>Style jurnal dan buku custom tanpa ibid.</summary>
+    <updated>2026-02-08</updated>
+  </info>
+
+  <!-- AUTHOR -->
+  <macro name="author">
+    <names variable="author">
+      <name form="long" name-as-sort-order="first" sort-separator=", "/>
+    </names>
+  </macro>
+
+  <!-- YEAR -->
+  <macro name="year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <!-- TITLE -->
+  <macro name="title">
+    <text variable="title"/>
+  </macro>
+
+  <!-- JOURNAL -->
+  <macro name="journal">
+    <group>
+      <text variable="container-title" font-style="italic"/>
+      <group prefix=". ">
+        <text variable="volume"/>
+        <group prefix="(" suffix=")">
+          <text variable="issue"/>
+        </group>
+        <text variable="page" prefix=": "/>
+      </group>
+    </group>
+  </macro>
+
+  <!-- BOOK -->
+  <macro name="book">
+    <group>
+      <text variable="publisher"/>
+      <text variable="publisher-place" prefix=". "/>
+    </group>
+  </macro>
+
+  <!-- CITATION (IN-TEXT) -->
+  <citation>
+    <layout>
+      <text macro="author"/>
+      <text macro="year" prefix=", "/>
+    </layout>
+  </citation>
+
+  <!-- BIBLIOGRAPHY -->
+  <bibliography hanging-indent="true">
+    <layout suffix=".">
+      
+      <!-- JOURNAL ARTICLE -->
+      <choose>
+        <if type="article-journal">
+          <text macro="author"/>
+          <text macro="year" prefix=". "/>
+          <text macro="title" prefix=". "/>
+          <text macro="journal" prefix=". "/>
+          <text variable="URL" prefix=". "/>
+        </if>
+
+        <!-- BOOK -->
+        <else-if type="book">
+          <text macro="author"/>
+          <text macro="year" prefix=". "/>
+          <text macro="title" prefix=". " font-style="italic"/>
+          <text macro="book" prefix=". "/>
+        </else-if>
+      </choose>
+
+    </layout>
+  </bibliography>
+
+</style>
