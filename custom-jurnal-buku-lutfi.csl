@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl"
-  version="1.0"
-  class="author-date"
-  default-locale="en-US">
+       version="1.0"
+       class="author-date"
+       default-locale="en-US">
 
   <info>
     <title>Custom Jurnal Buku Lutfi</title>
@@ -16,8 +16,8 @@
 
   <!-- AUTHOR -->
   <macro name="author">
-    <names variable="author">
-      <name name-as-sort-order="first" sort-separator=", "/>
+    <names variable="author" delimiter=", ">
+      <name name-as-sort-order="first" />
     </names>
   </macro>
 
@@ -28,11 +28,16 @@
     </date>
   </macro>
 
+  <!-- TITLE -->
+  <macro name="title">
+    <text variable="title"/>
+  </macro>
+
   <!-- JOURNAL -->
   <macro name="journal">
-    <text variable="container-title" font-style="italic"/>
-    <group prefix=". ">
-      <text variable="volume"/>
+    <group>
+      <text variable="container-title" font-style="italic"/>
+      <text variable="volume" prefix=". "/>
       <group prefix="(" suffix=")">
         <text variable="issue"/>
       </group>
@@ -42,13 +47,15 @@
 
   <!-- BOOK -->
   <macro name="book">
-    <text variable="publisher"/>
-    <text variable="publisher-place" prefix=". "/>
+    <group>
+      <text variable="publisher"/>
+      <text variable="publisher-place" prefix=". "/>
+    </group>
   </macro>
 
-  <!-- IN-TEXT -->
+  <!-- IN-TEXT CITATION -->
   <citation>
-    <layout delimiter="; ">
+    <layout>
       <text macro="author"/>
       <text macro="year" prefix=", "/>
     </layout>
@@ -56,29 +63,32 @@
 
   <!-- BIBLIOGRAPHY -->
   <bibliography hanging-indent="true">
+    <sort>
+      <key macro="author"/>
+      <key macro="year"/>
+    </sort>
+
     <layout suffix=".">
       <choose>
 
+        <!-- JOURNAL ARTICLE -->
         <if type="article-journal">
           <text macro="author"/>
           <text macro="year" prefix=". "/>
-          <text variable="title" prefix=". "/>
+          <text macro="title" prefix=". "/>
           <text macro="journal" prefix=". "/>
-          <text variable="URL" prefix=". "/>
+          <group prefix=". ">
+            <text variable="URL"/>
+          </group>
         </if>
 
+        <!-- BOOK -->
         <else-if type="book">
           <text macro="author"/>
           <text macro="year" prefix=". "/>
-          <text variable="title" font-style="italic" prefix=". "/>
+          <text macro="title" prefix=". " font-style="italic"/>
           <text macro="book" prefix=". "/>
         </else-if>
-
-        <else>
-          <text macro="author"/>
-          <text macro="year" prefix=". "/>
-          <text variable="title" prefix=". "/>
-        </else>
 
       </choose>
     </layout>
